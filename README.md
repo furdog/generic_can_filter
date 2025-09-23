@@ -1,3 +1,6 @@
+# WIP
+Ongoing heavyly work in progress. Project is not ready at all.
+
 # Generic can filter
 This project implements generic CAN2.0 filter software for various vehicles:
 	- Renault Kangoo ZE
@@ -12,7 +15,7 @@ This project implements generic CAN2.0 filter software for various vehicles:
 - User friendly Web interface
 - 100% MISRA compliance (only for platform independent code)
 
-##TODO
+## TODO
 - Convert various can loggers data to RAW can data
 - Decode RAW can data and print all variables (using codecs)
 
