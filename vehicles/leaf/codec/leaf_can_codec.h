@@ -40,19 +40,19 @@
  * into CAN data buffers.
  *
  * Additional note:
- * _ze0, _ze1, _aze0, etc, prefixes fill be used for various vehicle versions
+ * _ze0, _ze1, _aze0, etc, prefixes will be used for various vehicle versions
  * no prefix means the message is applicable for all vehicles. There will
  * be also special cases (that should be properly documented).
  * Some messages will contain those prefixes even though they're not version
- * dependent. This means that the author (furdog) can not confirm behaviour on different
- * vehicle version.
+ * dependent. This means that the author, furdog, can not confirm behaviour on
+ * different vehicle version.
  *****************************************************************************/
 
 /******************************************************************************
  * BO_ 1468 x5BC: 8 HVBAT
  *****************************************************************************/
-/* Tells if x5bc message is valid (booted up) */
-bool leaf_x5bc_is_valid(uint8_t *data)
+/* Tells if x5BC message is valid (booted up) */
+bool leaf_ze0_x5BC_is_valid(uint8_t *data)
 {
 	bool result = false;
 
@@ -64,23 +64,23 @@ bool leaf_x5bc_is_valid(uint8_t *data)
 	return result;
 }
 
-/* Capacity MUX (poorly documented) */
-enum leaf_x5bc_capacity_mux {
-	LEAF_X5BC_CAPACITY_MUX_REMAINING,
-	LEAF_X5BC_CAPACITY_MUX_FULL
+/* Capacity MUX (poorly documented, lackin in dbc file) */
+enum leaf_ze0_x5BC_capacity_mux {
+	LEAF_ZE0_X5BC_CAPACITY_MUX_FULL,
+	LEAF_ZE0_X5BC_CAPACITY_MUX_REMAINING
 };
 
-enum leaf_x5bc_capacity_mux leaf_x5bc_get_capacity_mux(uint8_t *data) {
-	/* leaf_x5bc_get_capacity_gids will show
+enum leaf_ze0_x5BC_capacity_mux leaf_ze0_x5BC_get_capacity_mux(uint8_t *data) {
+	/* leaf_ze0_x5BC_get_capacity_gids will show
 	 * either full or remaining capacity based on this mux: */
-	return ((data[5u] & 0x10u) > 0u) ? LEAF_X5BC_CAPACITY_MUX_REMAINING :
-					   LEAF_X5BC_CAPACITY_MUX_FULL;
+	return ((data[5u] & 0x10u) > 0u) ? LEAF_ZE0_X5BC_CAPACITY_MUX_FULL :
+					  LEAF_ZE0_X5BC_CAPACITY_MUX_REMAINING;
 }
 
 /* SG_ LB_Remain_Capacity :
  * 	7|10@0+ (1,0) [0|500] "gids" Vector__XXX
- * WARNING: returned value depends on leaf_x5bc_get_capacity_mux */
-uint16_t leaf_x5bc_get_capacity_gids(uint8_t *data) {
+ * WARNING: returned value depends on leaf_ze0_x5BC_get_capacity_mux */
+uint16_t leaf_ze0_x5BC_get_capacity_gids(uint8_t *data) {
 	struct bite b = bite_init(data, BITE_ORDER_DBC_0, 7u, 10u);
 
 	return bite_get_u16(&b);
