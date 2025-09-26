@@ -54,14 +54,8 @@
 /* Tells if x5BC message is valid (booted up) */
 bool leaf_ze0_x5BC_is_valid(uint8_t *data)
 {
-	bool result = false;
-
 	/* If LBC not booted up - exit */
-	if (data[0u] != 0xFFu) {
-		result = true;
-	}
-
-	return result;
+	return data[0u] != 0xFFu;
 }
 
 /* Capacity MUX (poorly documented, lackin in dbc file) */
@@ -84,6 +78,38 @@ uint16_t leaf_ze0_x5BC_get_capacity_gids(uint8_t *data) {
 	struct bite b = bite_init(data, BITE_ORDER_DBC_0, 7u, 10u);
 
 	return bite_get_u16(&b);
+}
+
+
+/******************************************************************************
+ * BO_ 475 x1DB: 8 HVBAT
+ *****************************************************************************/
+
+/* SG_ LB_Total_Voltage :
+ * 	23|10@0+ (0.5,0) [0|450] "V" Vector__XXX */
+uint16_t leaf_ze0_x1DB_get_voltage_V_x2(uint8_t *data)
+{
+		struct bite b = bite_init(data, BITE_ORDER_DBC_0, 23U, 10U);
+
+		return bite_get_u16(&b);
+}
+
+/* There's an error in dbc file! Value is signed actually. */
+/* SG_ LB_Current :
+ * 	7|11@0+ (0.5,0) [-400|200] "A" Vector__XXX */
+int16_t leaf_ze0_x1DB_get_current_A_x2(uint8_t *data)
+{
+		struct bite b = bite_init(data, BITE_ORDER_DBC_0, 7U, 11U);
+
+		return bite_get_i16(&b);
+}
+
+/* Tells if x1DB message is valid (booted up) */
+bool leaf_ze0_x1DB_is_valid(uint8_t *data)
+{
+	struct bite b = bite_init(data, BITE_ORDER_DBC_0, 23U, 10U);
+
+	return bite_get_u16(&b) != 1023u;
 }
 
 #endif /* LEAF_CAN_CODEC_H */

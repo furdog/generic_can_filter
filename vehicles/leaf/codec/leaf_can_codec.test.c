@@ -6,7 +6,8 @@
 
 void leaf_ze0_x5BC_test_invalid()
 {
-	uint8_t sample_ze0_x5BC_0[] = { 0xFF }; /* Set all data to 0xFF */
+	uint8_t sample_ze0_x5BC_0[] = { /* Set all data to 0xFF */
+		0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 
 	/* Must fail validation */
 	assert(!leaf_ze0_x5BC_is_valid(sample_ze0_x5BC_0));
@@ -40,10 +41,32 @@ void leaf_ze0_x5BC_test_capacity()
 	assert(remaining_gids == 342);
 }
 
+void leaf_ze0_x1DB_test_measurements()
+{
+	uint16_t voltage_V_x2;
+	int16_t  current_A_x2;
+
+	uint8_t sample_ze0_x1DB_invalid[] = { /* Set all data to 0xFF */
+		0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+
+	uint8_t sample_ze0_x1DB[] = {
+		0xFF, 0xC0, 0xC2, 0x2A, 0x5B, 0x00, 0x02, 0x60 };
+
+	assert(!leaf_ze0_x1DB_is_valid(sample_ze0_x1DB_invalid));
+	assert(leaf_ze0_x1DB_is_valid(sample_ze0_x1DB));
+
+	voltage_V_x2 = leaf_ze0_x1DB_get_voltage_V_x2(sample_ze0_x1DB);
+	current_A_x2 = leaf_ze0_x1DB_get_current_A_x2(sample_ze0_x1DB);
+
+	printf("voltage_V_x2: %u (%fV)\n", voltage_V_x2, voltage_V_x2 / 2.0f);
+	printf("current_A_x2: %i (%fA)\n", current_A_x2, current_A_x2 / 2.0f);
+}
+
 int main()
 {
 	leaf_ze0_x5BC_test_invalid();
 	leaf_ze0_x5BC_test_capacity();
+	leaf_ze0_x1DB_test_measurements();
 
 	return 0;
 }
