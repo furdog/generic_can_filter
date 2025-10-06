@@ -21,4 +21,8 @@ if cd `basename $REPO .git`; then git pull; cd ..; else git clone "$REPO"; fi
 REPO='https://github.com/furdog/bitE.git'
 if cd `basename $REPO .git`; then git pull; cd ..; else git clone "$REPO"; fi
 
+# Clone charge_counter
+REPO='https://github.com/furdog/charge_counter.git'
+if cd `basename $REPO .git`; then git pull; cd ..; else git clone "$REPO"; fi
+
 popd
