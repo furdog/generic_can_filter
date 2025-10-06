@@ -33,6 +33,12 @@ This project implements generic CAN2.0 filter software for various vehicles, wit
 
 ## Project Vision & Architecture
 Safety and determinism are the main priorities. The project aims for 100% compliance with MISRA and is designed with safety-critical concerns in mind to ensure robustness and reliability.
+The only bottlenecks are:
+- Target platforms can't be properly tested for critical safety. (Arduino is a BIG NO, though is suitable for initial prototyping)
+- No strict immutablity, nor version control policy.
+- There's no restriction on hardware, yet.
+
+For now only business logic and underliyng libraries are fully compliant and designed that way.
 
 The `vehicles` directory will be renamed to a more generic name in the future, as this CAN filter will be targeted for more devices.
 
