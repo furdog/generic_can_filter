@@ -1,6 +1,15 @@
 # CRITICAL NOTE
 The project is NOT under active development now. I may get back to it sooner or later, but for now i fucused on other stuff.
-So nothing to see here at the moment. The project is still mainly in concept stage. I'll soon open source other my project related with CAN FILTER.
+So nothing to see here at the moment. The project is still mainly in concept stage, but I have open-sourced two other similar projects for kangoo ZE and Leaf ZE0:
+
+https://github.com/ElektroBOXua/kangoo_can_filter
+
+https://github.com/ElektroBOXua/leaf_can_filter
+
+Both are low quality code (sorry for that), but hey! They are somewhat complete at this point. Bad thing - there's no documentation at all and projects primarily built under Windows environment.
+Unlike Generic CAN filter, they are under constant improvement and development.
+
+The "Generic CAN Filter" project was primarily planned to refactor these two to comply with higher coding and design standards.
 
 # Generic CAN Filter
 This project implements generic CAN2.0 filter software for various vehicles, with a focus on determinism, safety, and re-usability. It is currently a work in progress and not ready for production use.
