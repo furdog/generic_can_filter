@@ -1,3 +1,7 @@
+# CRITICAL NOTE
+The project is NOT under active development now. I may get back to it sooner or later, but for now i fucused on other stuff.
+So nothing to see here at the moment. The project is still mainly in concept stage. I'll soon open source other my project related with CAN FILTER.
+
 # Generic CAN Filter
 This project implements generic CAN2.0 filter software for various vehicles, with a focus on determinism, safety, and re-usability. It is currently a work in progress and not ready for production use.
 
